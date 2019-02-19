@@ -9,6 +9,7 @@ const client = new Client()
 client.on('device-new', device => {
   console.log(`device-new: ${device.alias} ${device.mac} ${device.relayState}`)
   const d = devicesByMac[device.mac]
+  if (!d) return // unknown device
   d.device = device
 
   device.on('power-on', () => d.state = 1)
